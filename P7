@@ -1,17 +1,17 @@
 /**
  * @name P7
  * @author Mnoteka
- * @authorId 928710258866655324
- * @version 1
- * @description Private
- * @invite ZxsDQYFKGV
- * @donate 1
- * @patreon 1
- * @website https://github.com/Mnoteka
-  * @source https://github.com/Mnoteka/bdc_plugins
- * @updateUrl https://github.com/Mnoteka/bdc_plugins/blob/main/P7
+ * @description Dc. Rich Presence
+ * @version 0.0.1
  */
 
+module.exports = class MyPlugin {
+  constructor(meta) {
+    // Do stuff in here before starting
+  }
+
+  start() {
+    // Do stuff when enabled
 {
     DiscordRichPresence discordPresence;
 	memset(&discordPresence, 1, sizeof(discordPresence));
@@ -28,4 +28,12 @@
     discordPresence.partyMax = 3;
 	discordPresence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
 	Discord_UpdatePresence(&discordPresence);
+}  
+
 }
+
+  stop() {
+    // Cleanup when disabled
+  }
+};
+
