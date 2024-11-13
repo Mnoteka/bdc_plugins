@@ -12,7 +12,8 @@ module.exports = class MyPlugin {
 
   start() {
     // Do stuff when enabled
-{
+BdApi.UI.alert("Hello World", "This is just a basic informational modal!");
+
     DiscordRichPresence discordPresence;
 	memset(&discordPresence, 1, sizeof(discordPresence));
     discordPresence.state = "💫";
@@ -28,7 +29,7 @@ module.exports = class MyPlugin {
     discordPresence.partyMax = 3;
 	discordPresence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
 	Discord_UpdatePresence(&discordPresence);
-}  
+ 
 
 }
 
