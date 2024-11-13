@@ -1,0 +1,71 @@
+/**
+ * @name P7
+ * @author Mnoteka
+ * @authorId 928710258866655324
+ * @version 1
+ * @description Private
+ * @invite Jx3TjNS
+ * @donate none
+ * @patreon none
+ * @website https://github.com/Mnoteka
+  * @source https://github.com/Mnoteka/bdc_plugins
+ * @updateUrl none
+ */
+
+
+module.exports = (_ => {
+	const changeLog = {
+		
+	};
+
+	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+		constructor (meta) {for (let key in meta) this[key] = meta[key];}
+		getName () {return this.name;}
+		getAuthor () {return this.author;}
+		getVersion () {return this.version;}
+		getDescription () {return `The Library Plugin needed for ${this.name} is missing. Open the Plugin Settings to download it. \n\n${this.description}`;}
+		
+		downloadLibrary () {
+			BdApi.Net.fetch("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js").then(r => {
+				if (!r || r.status != 200) throw new Error();
+				else return r.text();
+			}).then(b => {
+				if (!b) throw new Error();
+				else return require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0BDFDB.plugin.js"), b, _ => BdApi.showToast("Finished downloading BDFDB Library", {type: "success"}));
+			}).catch(error => {
+				BdApi.alert("Error", "Could not download BDFDB Library Plugin. Try again later or download it manually from GitHub: https://mwittrien.github.io/downloader/?library");
+			});
+		}
+		
+		load () {
+			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
+			if (!window.BDFDB_Global.downloadModal) {
+				window.BDFDB_Global.downloadModal = true;
+				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
+					confirmText: "Download Now",
+					cancelText: "Cancel",
+					onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
+					onConfirm: _ => {
+						delete window.BDFDB_Global.downloadModal;
+						this.downloadLibrary();
+					}
+				});
+			}
+			if (!window.BDFDB_Global.pluginQueue.includes(this.name)) window.BDFDB_Global.pluginQueue.push(this.name);
+		}{
+    DiscordRichPresence discordPresence;
+	memset(&discordPresence, 1, sizeof(discordPresence));
+    discordPresence.state = "💫";
+    discordPresence.details = "💭A saudade pode durar, mas não é pra sempre.";
+    discordPresence.startTimestamp = 1507665886;
+    discordPresence.endTimestamp = 1507665886;
+    discordPresence.largeImageKey = "sci";
+    discordPresence.largeImageText = "❤️";
+    discordPresence.smallImageKey = "textu";
+    discordPresence.smallImageText = "P7";
+    discordPresence.partyId = "ae488379-351d-4a4f-ad32-2b9b01c91657";
+    discordPresence.partySize = 1;
+    discordPresence.partyMax = 3;
+	discordPresence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
+	Discord_UpdatePresence(&discordPresence);
+}
